@@ -1,4 +1,3 @@
-
 import { useGetAllPackages } from "../api/package/useGetAllPackages";
 import PackagesTable from "../components/PackagesTable/Table";
 
@@ -13,7 +12,7 @@ const AllPackages = () => {
   }
   return (
     <div className="container mt-5 pt-3">
-      <h1>All Packages</h1>
+      <h1 style={{ color: "white" }}>All Packages</h1>
       {data && <PackagesTable packages={data} />}
     </div>
   );

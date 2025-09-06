@@ -16,7 +16,6 @@ function App() {
             <Route path="/" element={<AllPackages />} />
             <Route path="/PackageCreation" element={<PackageCreation />} />
           </Routes>
-          <p>Click on the Vite and React logos to learn more</p>
         </main>
       </div>
     </>

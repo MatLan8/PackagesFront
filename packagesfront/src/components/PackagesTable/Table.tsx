@@ -25,12 +25,6 @@ const PackagesTable: React.FC<PackagesTableProps> = ({ packages }) => {
               pkg.statusHistory && pkg.statusHistory.length > 0
                 ? pkg.statusHistory[pkg.statusHistory.length - 1].statusValue
                 : null;
-            console.log(
-              pkg.id,
-              latestStatus,
-              typeof latestStatus,
-              pkg.statusHistory
-            );
             return (
               <tr key={pkg.id}>
                 <td>{pkg.id}</td>
