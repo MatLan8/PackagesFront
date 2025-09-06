@@ -1,0 +1,41 @@
+nav {
+  position: fixed;
+  top: 0; /* ensure it’s at the very top */
+  left: 0; /* align left */
+  width: 100%;
+  z-index: 1000;
+  height: 70px;
+  font-size: 13pt;
+  background-color: var(--light-1);
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  justify-content: space-between; /* distributes homeLink left and linksContainer right */
+}
+
+.linksContainer {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.homeLink {
+  margin-right: auto;
+}
+
+nav a {
+  height: 100%;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  font-weight: 500;
+  color: var(--primary);
+  transition: background-color 0.3s ease; /* Add this line */
+}
+
+nav a:hover {
+  background-color: var(--accent-1);
+}
