@@ -5,11 +5,8 @@ import { StatusLabels } from "../Data/StatusValue";
 import StatusDropdown from "../components/StatusDropdown";
 
 const IndividualPackage = () => {
-  const {
-    data: pkg,
-    isLoading,
-    error,
-  } = useGetByIdPackage("4130c494-6e15-4569-93ac-b90dc160b12c");
+  const { packageId } = useParams();
+  const { data: pkg, isLoading, error } = useGetByIdPackage(packageId ?? "");
   const statusColors = [
     "bg-primary", // 0: Created
     "bg-warning", // 1: Sent
@@ -49,7 +46,7 @@ const IndividualPackage = () => {
 
         {/* Receiver column */}
         <div className="col-md-6">
-          <h4>Receiver Info</h4>
+          <h4>Recipient Info</h4>
           <p className="fs-5">
             <strong>Name:</strong> {pkg.receiverName}
           </p>
@@ -79,7 +76,11 @@ const IndividualPackage = () => {
       </div>
       <br />
       <br />
-      <div className="d-flex align-items-center flex-wrap">
+      <div
+        className={`d-flex align-items-center flex-wrap ${
+          pkg.statusHistory.length === 1 ? "justify-content-center" : ""
+        }`}
+      >
         {pkg.statusHistory.map((status, index) => (
           <React.Fragment key={status.statusValue}>
             {/* Status column with dot on left and info on right */}

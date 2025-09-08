@@ -16,7 +16,7 @@ function App() {
           <Routes>
             <Route path="/" element={<AllPackages />} />
             <Route path="/PackageCreation" element={<PackageCreation />} />
-            <Route path="/packagef" element={<IndividualPackage />} />
+            <Route path="/package/:packageId" element={<IndividualPackage />} />
           </Routes>
         </main>
       </div>

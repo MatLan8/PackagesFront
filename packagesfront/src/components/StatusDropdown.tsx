@@ -35,6 +35,9 @@ const StatusDropdown: React.FC<ChangeStatusButtonProps> = ({ packageId }) => {
           queryClient.invalidateQueries({
             queryKey: ["getPackageAvailableStatuses", packageId],
           });
+          queryClient.invalidateQueries({
+            queryKey: ["getByIdPackage", packageId],
+          });
           setShowModal(false);
           setPendingStatus(null);
         },
