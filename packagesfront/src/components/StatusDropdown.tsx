@@ -9,13 +9,9 @@ import { StatusLabels } from "../Data/StatusValue";
 
 interface ChangeStatusButtonProps {
   packageId: string;
-  onSelectStatus?: (status: number) => void;
 }
 
-const StatusDropdown: React.FC<ChangeStatusButtonProps> = ({
-  packageId,
-  onSelectStatus,
-}) => {
+const StatusDropdown: React.FC<ChangeStatusButtonProps> = ({ packageId }) => {
   const { data, error, isLoading } = useGetPackageAvailableStatuses(packageId);
   const updateStatusMutation = useUpdatePackageStatus();
   const queryClient = useQueryClient();
@@ -39,7 +35,6 @@ const StatusDropdown: React.FC<ChangeStatusButtonProps> = ({
           queryClient.invalidateQueries({
             queryKey: ["getPackageAvailableStatuses", packageId],
           });
-          onSelectStatus?.(pendingStatus);
           setShowModal(false);
           setPendingStatus(null);
         },

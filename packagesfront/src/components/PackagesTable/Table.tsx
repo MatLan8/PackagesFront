@@ -6,7 +6,13 @@ import StatusDropdown from "../StatusDropdown";
 type PackagesTableProps = {
   packages: Package[];
 };
-
+const statusColors = [
+  "bg-primary", // 0: Created
+  "bg-warning", // 1: Sent
+  "bg-danger", // 2: Returned
+  "bg-success", // 3: Accepted
+  "bg-secondary", // 4: Canceled
+];
 const PackagesTable: React.FC<PackagesTableProps> = ({ packages }) => {
   return (
     <div className="table-responsive mt-4">
@@ -33,7 +39,19 @@ const PackagesTable: React.FC<PackagesTableProps> = ({ packages }) => {
                 <td>{pkg.senderName}</td>
                 <td>{pkg.receiverName}</td>
                 <td>
-                  {latestStatus !== null ? StatusLabels[latestStatus] : "N/A"}
+                  <div className="d-flex align-items-center">
+                    <div
+                      className={`rounded-circle me-2 ${
+                        statusColors[latestStatus ?? 0]
+                      }`}
+                      style={{ width: "20px", height: "20px" }}
+                    ></div>
+                    <span className="text-dark">
+                      {latestStatus !== null
+                        ? StatusLabels[latestStatus]
+                        : "N/A"}
+                    </span>
+                  </div>
                 </td>
                 <td>{new Date(pkg.creationDate).toLocaleString()}</td>
                 <td>
