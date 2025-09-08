@@ -1,6 +1,7 @@
 import React from "react";
 import type { Package } from "../../types/Package";
 import { StatusLabels } from "../../Data/StatusValue";
+import StatusDropdown from "../StatusDropdown";
 
 type PackagesTableProps = {
   packages: Package[];
@@ -17,6 +18,7 @@ const PackagesTable: React.FC<PackagesTableProps> = ({ packages }) => {
             <th>Receiver Name</th>
             <th>Status</th>
             <th>Creation Date</th>
+            <th>Change status</th>
           </tr>
         </thead>
         <tbody>
@@ -34,6 +36,9 @@ const PackagesTable: React.FC<PackagesTableProps> = ({ packages }) => {
                   {latestStatus !== null ? StatusLabels[latestStatus] : "N/A"}
                 </td>
                 <td>{new Date(pkg.creationDate).toLocaleString()}</td>
+                <td>
+                  <StatusDropdown packageId={pkg.id} />
+                </td>
               </tr>
             );
           })}

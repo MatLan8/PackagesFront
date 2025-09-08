@@ -12,8 +12,14 @@ const AllPackages = () => {
   }
   return (
     <div className="container mt-5 pt-3">
-      <h1 style={{ color: "white" }}>All Packages</h1>
-      {data && <PackagesTable packages={data} />}
+      {data && data.length === 0 ? (
+        <h1 style={{ color: "white" }}>There are no packages to track</h1>
+      ) : (
+        <>
+          <h1 style={{ color: "white" }}>All Packages</h1>
+          {data && <PackagesTable packages={data} />}
+        </>
+      )}
     </div>
   );
 };

@@ -1,0 +1,126 @@
+import React, { useState } from "react";
+import Dropdown from "react-bootstrap/Dropdown";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
+import { useQueryClient } from "@tanstack/react-query";
+import { useGetPackageAvailableStatuses } from "../api/package/useGetPackageAvailableStatuses";
+import { useUpdatePackageStatus } from "../api/package/useUpdatePackageStatus";
+import { StatusLabels } from "../Data/StatusValue";
+
+interface ChangeStatusButtonProps {
+  packageId: string;
+  onSelectStatus?: (status: number) => void;
+}
+
+const StatusDropdown: React.FC<ChangeStatusButtonProps> = ({
+  packageId,
+  onSelectStatus,
+}) => {
+  const { data, error, isLoading } = useGetPackageAvailableStatuses(packageId);
+  const updateStatusMutation = useUpdatePackageStatus();
+  const queryClient = useQueryClient();
+
+  const [showModal, setShowModal] = useState(false);
+  const [pendingStatus, setPendingStatus] = useState<number | null>(null);
+
+  const handleSelectStatus = (statusValue: number) => {
+    setPendingStatus(statusValue);
+    setShowModal(true);
+  };
+
+  const confirmChange = () => {
+    if (pendingStatus === null) return;
+
+    updateStatusMutation.mutate(
+      { packageId, status: pendingStatus },
+      {
+        onSuccess: () => {
+          queryClient.invalidateQueries({ queryKey: ["getAllPackages"] });
+          queryClient.invalidateQueries({
+            queryKey: ["getPackageAvailableStatuses", packageId],
+          });
+          onSelectStatus?.(pendingStatus);
+          setShowModal(false);
+          setPendingStatus(null);
+        },
+        onError: () => {
+          setShowModal(false);
+          setPendingStatus(null);
+        },
+      }
+    );
+  };
+
+  if (isLoading) return <span>Loading...</span>;
+  if (error) return <span className="text-danger">Error</span>;
+
+  return (
+    <>
+      <Dropdown>
+        <Dropdown.Toggle
+          variant="primary"
+          size="sm"
+          id={`dropdown-${packageId}`}
+        >
+          Select...
+        </Dropdown.Toggle>
+
+        <Dropdown.Menu
+          renderOnMount
+          popperConfig={{
+            strategy: "fixed",
+          }}
+        >
+          {data && data.length > 0 ? (
+            data.map((statusValue) => (
+              <Dropdown.Item
+                key={statusValue}
+                onClick={() => handleSelectStatus(statusValue)}
+                disabled={updateStatusMutation.status === "pending"}
+              >
+                {StatusLabels[statusValue]}
+              </Dropdown.Item>
+            ))
+          ) : (
+            <Dropdown.Item className="text-dark" disabled>
+              Final Status
+            </Dropdown.Item>
+          )}
+        </Dropdown.Menu>
+      </Dropdown>
+
+      {/* Confirmation Modal */}
+      <Modal
+        className="text-dark"
+        show={showModal}
+        onHide={() => setShowModal(false)}
+        centered
+      >
+        <Modal.Header className="text-dark" closeButton>
+          <Modal.Title>Confirm Status Change</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="text-dark">
+          Are you sure you want to change status to{" "}
+          <strong>
+            {pendingStatus !== null && StatusLabels[pendingStatus]}
+          </strong>
+          ?
+        </Modal.Body>
+        <Modal.Footer className="text-dark">
+          <Button variant="secondary" onClick={() => setShowModal(false)}>
+            No
+          </Button>
+          <Button
+            variant="primary"
+            onClick={confirmChange}
+            disabled={updateStatusMutation.status === "pending"}
+          >
+            Yes
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
+  );
+};
+
+export default StatusDropdown;
