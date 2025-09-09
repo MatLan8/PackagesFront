@@ -69,6 +69,7 @@ const PackageCreation: React.FC = () => {
           type="text"
           maxLength={15}
           pattern="^\+?[0-9]{7,15}$"
+          placeholder="+37000000000"
         />
 
         <h5>Recipient Information</h5>
@@ -97,6 +98,7 @@ const PackageCreation: React.FC = () => {
           type="tel"
           maxLength={15}
           pattern="^\+?[0-9]{7,15}$"
+          placeholder="+37000000000"
         />
 
         <button
