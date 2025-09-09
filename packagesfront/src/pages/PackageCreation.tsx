@@ -42,7 +42,14 @@ const PackageCreation: React.FC = () => {
   };
 
   return (
-    <div className="container mt-4">
+    <div
+      className="container mt-4 mb-4 py-4 shadow"
+      style={{
+        backgroundColor: "var(--secondary)",
+        maxWidth: "400px",
+        borderRadius: "20px",
+      }}
+    >
       <AppToast
         show={showToast}
         onClose={() => setShowToast(false)}
@@ -50,6 +57,7 @@ const PackageCreation: React.FC = () => {
         body={"Packed created successfully!"}
       />
       <h2>Create New Package</h2>
+      <br />
       <form onSubmit={handleSubmit}>
         <h5>Sender Information</h5>
         <FormInput
@@ -79,7 +87,7 @@ const PackageCreation: React.FC = () => {
           pattern="^\+?[0-9]{7,15}$"
           placeholder="+37000000000"
         />
-
+        <br />
         <h5>Recipient Information</h5>
         <FormInput
           label="Name"

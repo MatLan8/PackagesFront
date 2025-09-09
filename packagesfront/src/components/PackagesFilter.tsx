@@ -23,7 +23,12 @@ const PackagesFilter: React.FC<PackagesFilterProps> = ({
   };
 
   return (
-    <div className="mb-3 p-3 bg-dark text-light rounded">
+    <div
+      className="mb-3 p-3 bg-dark text-light shadow"
+      style={{
+        borderRadius: "20px",
+      }}
+    >
       <div className="mb-2">
         <label className="form-label fs-4">Filter by Package ID:</label>
         <input

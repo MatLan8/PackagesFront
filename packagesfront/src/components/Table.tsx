@@ -1,7 +1,7 @@
 import React from "react";
-import type { Package } from "../../types/Package";
-import { StatusLabels } from "../../Data/StatusValue";
-import StatusDropdown from "../StatusDropdown";
+import type { Package } from "../types/Package";
+import { StatusLabels } from "../Data/StatusValue";
+import StatusDropdown from "./StatusDropdown";
 import { useNavigate } from "react-router-dom";
 
 type PackagesTableProps = {

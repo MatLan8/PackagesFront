@@ -7,7 +7,7 @@ const NavBar = () => {
       <Link to="/" className={styles.homeLink}>
         All Packages
       </Link>
-      <div className={`${styles.linksContainer}`}>
+      <div className={`${styles.createLink}`}>
         <Link to="/PackageCreation">Create package</Link>
       </div>
     </nav>

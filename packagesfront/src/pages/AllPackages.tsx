@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useGetAllPackages } from "../api/package/useGetAllPackages";
-import PackagesTable from "../components/PackagesTable/Table";
+import PackagesTable from "../components/Table";
 import PackagesFilter from "../components/PackagesFilter";
 
 const AllPackages = () => {
@@ -32,11 +32,20 @@ const AllPackages = () => {
   });
 
   return (
-    <div className="container mt-5 pt-3">
+    <div
+      className="container mt-5 pt-3 py-5 px-5 shadow"
+      style={{
+        backgroundColor: "var(--secondary)",
+        borderRadius: "20px",
+      }}
+    >
       {data && data.length === 0 ? (
         <h1 style={{ color: "white" }}>There are no packages to track</h1>
       ) : (
         <>
+          <h1 style={{ color: "white" }}>Packages tracking app</h1>
+          <br />
+          <br />
           <PackagesFilter
             idFilter={idFilter}
             statusFilter={statusFilter}
@@ -48,7 +57,7 @@ const AllPackages = () => {
             <h1 style={{ color: "white" }}>There are no matching packages</h1>
           ) : (
             <>
-              <h1 style={{ color: "white" }}>All Packages</h1>
+              <h2 style={{ color: "white" }}>All Packages</h2>
               {filteredPackages && (
                 <PackagesTable packages={filteredPackages} />
               )}

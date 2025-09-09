@@ -15,7 +15,12 @@ const IndividualPackage = () => {
     "bg-secondary", // 4: Canceled
   ];
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading)
+    return (
+      <div>
+        <h1>Invalid package id</h1>
+      </div>
+    );
   if (error) return <div className="text-danger">Error: {error.message}</div>;
   if (!pkg) return <div>No package found.</div>;
 
@@ -25,10 +30,17 @@ const IndividualPackage = () => {
       : null;
 
   return (
-    <div className="container mt-5 pt-3 text-light">
+    <div
+      className="container mt-5 pt-3 py-5 px-5 text-light shadow"
+      style={{
+        backgroundColor: "var(--secondary)",
+        borderRadius: "20px",
+      }}
+    >
       <h1>Package Details</h1>
-      <h5 className="mb-4">Tracking Number: {pkg.id}</h5>
-
+      <br />
+      <h5 className="mb-4 fs-4">Tracking Number: {pkg.id}</h5>
+      <br />
       <div className="row">
         {/* Sender column */}
         <div className="col-md-6">
