@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useCreatePackage } from "../api/package/useCreatePackage";
 import type { PackageCreate } from "../api/package/useCreatePackage";
-import FormInput from "../components/Form/FormInput";
+import FormInput from "../components/FormInput";
 
 const PackageCreation: React.FC = () => {
   const mutation = useCreatePackage();
@@ -50,6 +50,7 @@ const PackageCreation: React.FC = () => {
           value={formData.senderName}
           onChange={handleChange}
           required
+          maxLength={40}
         />
         <FormInput
           label="Address"
@@ -57,6 +58,7 @@ const PackageCreation: React.FC = () => {
           value={formData.senderAddress}
           onChange={handleChange}
           required
+          maxLength={40}
         />
         <FormInput
           label="Phone"
@@ -64,6 +66,9 @@ const PackageCreation: React.FC = () => {
           value={formData.senderPhone}
           onChange={handleChange}
           required
+          type="text"
+          maxLength={15}
+          pattern="^\+?[0-9]{7,15}$"
         />
 
         <h5>Recipient Information</h5>
@@ -73,6 +78,7 @@ const PackageCreation: React.FC = () => {
           value={formData.receiverName}
           onChange={handleChange}
           required
+          maxLength={40}
         />
         <FormInput
           label="Address"
@@ -80,6 +86,7 @@ const PackageCreation: React.FC = () => {
           value={formData.receiverAddress}
           onChange={handleChange}
           required
+          maxLength={40}
         />
         <FormInput
           label="Phone"
@@ -87,6 +94,9 @@ const PackageCreation: React.FC = () => {
           value={formData.receiverPhone}
           onChange={handleChange}
           required
+          type="tel"
+          maxLength={15}
+          pattern="^\+?[0-9]{7,15}$"
         />
 
         <button

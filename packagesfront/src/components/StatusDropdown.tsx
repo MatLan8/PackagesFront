@@ -63,7 +63,7 @@ const StatusDropdown: React.FC<ChangeStatusButtonProps> = ({ packageId }) => {
           bg="success"
           onClose={() => setShowToast(false)}
           show={showToast}
-          delay={2000}
+          delay={3000}
           autohide
         >
           <Toast.Header>
