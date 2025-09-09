@@ -10,30 +10,17 @@ nav {
   display: flex;
   align-items: center;
   box-sizing: border-box;
-  justify-content: space-between;
-}
-
-.createLink {
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-.homeLink {
-  margin-right: auto;
 }
 
 nav a {
-  height: 100%;
-  padding: 0 20px;
-  display: flex;
-  align-items: center;
   text-decoration: none;
   font-weight: 500;
   color: var(--primary);
+  padding: 10px 10px;
+  display: flex;
+  align-items: center;
   transition: background-color 0.3s ease;
+  height: 100%;
 }
 
 nav a:hover {
