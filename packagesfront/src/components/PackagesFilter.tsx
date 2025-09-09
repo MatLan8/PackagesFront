@@ -3,7 +3,7 @@ import { StatusLabels } from "../Data/StatusValue";
 
 type PackagesFilterProps = {
   idFilter: string;
-  statusFilter: number[]; // array of selected statuses
+  statusFilter: number[];
   onIdFilterChange: (value: string) => void;
   onStatusFilterChange: (value: number[]) => void;
 };

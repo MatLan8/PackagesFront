@@ -42,6 +42,7 @@ const IndividualPackage = () => {
       <h5 className="mb-4 fs-4">Tracking Number: {pkg.id}</h5>
       <br />
       <div className="row">
+
         {/* Sender column */}
         <div className="col-md-6">
           <h4>Sender Info</h4>
@@ -56,7 +57,7 @@ const IndividualPackage = () => {
           </p>
         </div>
 
-        {/* Receiver column */}
+        {/* Recipient column */}
         <div className="col-md-6">
           <h4>Recipient Info</h4>
           <p className="fs-5">
@@ -95,15 +96,12 @@ const IndividualPackage = () => {
       >
         {pkg.statusHistory.map((status, index) => (
           <React.Fragment key={status.statusValue}>
-            {/* Status column with dot on left and info on right */}
             <div className="d-flex align-items-center">
-              {/* Dot */}
               <div
                 className={`rounded-circle ${statusColors[status.statusValue]}`}
                 style={{ width: "25px", height: "25px" }}
               ></div>
 
-              {/* Status info column */}
               <div className="d-flex flex-column ms-2">
                 <span className="fs-4">{StatusLabels[status.statusValue]}</span>
                 <span className="fs-5">
@@ -115,7 +113,6 @@ const IndividualPackage = () => {
               </div>
             </div>
 
-            {/* Line between statuses */}
             {index < pkg.statusHistory.length - 1 && (
               <div
                 className="flex-grow-1 border-top mx-3"

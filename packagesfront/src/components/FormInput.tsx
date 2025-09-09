@@ -9,7 +9,7 @@ export interface FormInputProps {
   type?: string;
   pattern?: string;
   placeholder?: string;
-  maxLength?: number; // <-- add maxLength here
+  maxLength?: number;
 }
 
 const FormInput: React.FC<FormInputProps> = ({
@@ -21,7 +21,7 @@ const FormInput: React.FC<FormInputProps> = ({
   type = "text",
   pattern,
   placeholder,
-  maxLength, // <-- receive it here
+  maxLength,
 }) => {
   return (
     <div className="mb-3 d-flex justify-content-center">
@@ -36,7 +36,7 @@ const FormInput: React.FC<FormInputProps> = ({
           type={type}
           pattern={pattern}
           placeholder={placeholder}
-          maxLength={maxLength} // <-- pass it to input
+          maxLength={maxLength}
           className="form-control"
         />
       </div>

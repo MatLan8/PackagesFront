@@ -1,13 +1,10 @@
-import { useState } from "react";
-import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import AllPackages from "./pages/AllPackages";
 import PackageCreation from "./pages/PackageCreation";
 import IndividualPackage from "./pages/IndividualPackage";
 import NavBar from "./components/navbar/NavBar";
-function App() {
-  const [count, setCount] = useState(0);
 
+function App() {
   return (
     <>
       <div>
