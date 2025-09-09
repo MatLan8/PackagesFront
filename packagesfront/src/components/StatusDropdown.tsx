@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
-import Toast from "react-bootstrap/Toast";
-import ToastContainer from "react-bootstrap/ToastContainer";
+import AppToast from "./AppToast";
 import { useQueryClient } from "@tanstack/react-query";
 import { useGetPackageAvailableStatuses } from "../api/package/useGetPackageAvailableStatuses";
 import { useUpdatePackageStatus } from "../api/package/useUpdatePackageStatus";
@@ -21,6 +20,7 @@ const StatusDropdown: React.FC<ChangeStatusButtonProps> = ({ packageId }) => {
   const [showModal, setShowModal] = useState(false);
   const [pendingStatus, setPendingStatus] = useState<number | null>(null);
   const [showToast, setShowToast] = useState(false);
+  const [toastBody, setToastBody] = useState("");
 
   const handleSelectStatus = (statusValue: number) => {
     setPendingStatus(statusValue);
@@ -43,6 +43,9 @@ const StatusDropdown: React.FC<ChangeStatusButtonProps> = ({ packageId }) => {
           });
           setShowModal(false);
           setPendingStatus(null);
+          setToastBody(
+            `Package status changed to ${StatusLabels[pendingStatus]}!`
+          );
           setShowToast(true);
         },
         onError: () => {
@@ -58,23 +61,12 @@ const StatusDropdown: React.FC<ChangeStatusButtonProps> = ({ packageId }) => {
 
   return (
     <>
-      <ToastContainer position="bottom-end" className="p-3 position-fixed">
-        <Toast
-          bg="success"
-          onClose={() => setShowToast(false)}
-          show={showToast}
-          delay={3000}
-          autohide
-        >
-          <Toast.Header>
-            <strong className="me-auto">Status Updated</strong>
-            <small>just now</small>
-          </Toast.Header>
-          <Toast.Body className="bg-white text-dark">
-            <strong>Package status updated successfully!</strong>
-          </Toast.Body>
-        </Toast>
-      </ToastContainer>
+      <AppToast
+        show={showToast}
+        onClose={() => setShowToast(false)}
+        header={"Status Updated"}
+        body={toastBody}
+      />
 
       <Dropdown>
         <Dropdown.Toggle

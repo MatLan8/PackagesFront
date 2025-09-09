@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { useCreatePackage } from "../api/package/useCreatePackage";
 import type { PackageCreate } from "../api/package/useCreatePackage";
 import FormInput from "../components/FormInput";
+import AppToast from "../components/AppToast";
 
 const PackageCreation: React.FC = () => {
   const mutation = useCreatePackage();
+
   const [formData, setFormData] = useState<PackageCreate>({
     senderName: "",
     senderAddress: "",
@@ -18,12 +20,12 @@ const PackageCreation: React.FC = () => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
-
+  const [showToast, setShowToast] = useState(false);
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     mutation.mutate(formData, {
       onSuccess: () => {
-        alert("Package created successfully!");
+        setShowToast(true);
         setFormData({
           senderName: "",
           senderAddress: "",
@@ -41,6 +43,12 @@ const PackageCreation: React.FC = () => {
 
   return (
     <div className="container mt-4">
+      <AppToast
+        show={showToast}
+        onClose={() => setShowToast(false)}
+        header={"Packaged Created"}
+        body={"Packed created successfully!"}
+      />
       <h2>Create New Package</h2>
       <form onSubmit={handleSubmit}>
         <h5>Sender Information</h5>
