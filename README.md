@@ -15,9 +15,9 @@ Follow these steps to run the project locally.
 
 - Configure environment variables:
 
-Copy the example environment file: cp .env.local_example .env.local
-Open .env.local and update the VITE_BASE_URL variable to point to your running backend API. For example: VITE_BASE_URL=https://localhost:7293/api
-(Replace 7293 with the port your backend is using.)
+1. Copy the example environment file: cp .env.local_example .env.local
+2. Open .env.local and update the VITE_BASE_URL variable to point to your running backend API. For example: VITE_BASE_URL=https://localhost:7293/api
+   (Replace 7293 with the port your backend is using.)
 
 - Start the frontend development server: npm run dev
 - Open your browser and navigate to the URL shown in the terminal.
